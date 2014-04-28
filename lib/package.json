@@ -1,0 +1,32 @@
+{
+    "name": "bizrules",
+    "version": "0.0.13",
+    "description": "Business Rules Engine",
+    "homepage": "http://www.bizrez.com",
+    "main": "engine.js",
+    "scripts": {
+        "test": "mocha test"
+    },
+    "dependencies": {
+        "async": "0.6.2",
+        "underscore":"1.6.0",
+        "mocha": "1.18.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mallond/bizrules"
+    },
+    "keywords": [
+        "bre",
+        "rules",
+        "engine",
+        "bpm",
+        "process",
+        "flow"
+    ],
+    "author": "David Mallon <mallond@bizrez.com> (http://bizrez.com/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mallond/bizrules/issues"
+    }
+}
