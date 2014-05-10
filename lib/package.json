@@ -1,6 +1,6 @@
 {
     "name": "rulesengine",
-    "version": "0.0.02",
+    "version": "0.0.04",
     "description": "Business Rules Engine",
     "homepage": "http://www.bizrez.com",
     "main": "engine.js",

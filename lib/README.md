@@ -123,11 +123,11 @@ facts = {
 ## Download
 
 The source is available for download from
-[GitHub](http://github.com/mallond/bizrules).
+[GitHub](http://github.com/mallond/rules).
 
-Alternatively, you can install using Node Package Manager [npm](https://www.npmjs.org/package/bizrules):
+Alternatively, you can install using Node Package Manager [npm](https://www.npmjs.org/package/rulesengine):
 
-    npm install bizrules
+    npm install rulesengine
 
     mocha test
 
