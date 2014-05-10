@@ -1,6 +1,6 @@
 {
-    "name": "bizrules",
-    "version": "0.0.13",
+    "name": "rulesengine",
+    "version": "0.0.01",
     "description": "Business Rules Engine",
     "homepage": "http://www.bizrez.com",
     "main": "engine.js",
@@ -27,6 +27,6 @@
     "author": "David Mallon <mallond@bizrez.com> (http://bizrez.com/)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/mallond/bizrules/issues"
+        "url": "https://github.com/mallond/rules/issues"
     }
 }

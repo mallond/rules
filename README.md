@@ -1,4 +1,4 @@
-## BizRules - JavaScript Condition Event  Engine
+## BizRez Rules - JavaScript Condition Event  Engine
 
 A small functional Rule Engine - simple maybe an understatement...
 
