@@ -129,7 +129,7 @@ Alternatively, you can install using Node Package Manager [npm](https://www.npmj
 
     npm install rulesengine
 
-    mocha test
+    mocha lib/test
 
 
 
