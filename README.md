@@ -190,6 +190,12 @@ function getFacts() {
 
 ```
 
+## Decision Table Rules (next WIP)
+
+## Map Rules (WIP)
+
+## Process Rules (WIP)
+
 ## Download
 
 The source is available for download from
