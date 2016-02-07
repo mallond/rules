@@ -6,11 +6,12 @@
     "start": ""
   },
   "dependencies": {
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "requirejs": "~2.1.11",
-      "async": "0.6.2",
-      "underscore":"1.6.0",
-      "mocha": "1.18.2"
+    "async": "0.6.2",
+    "underscore": "1.6.0",
+    "mocha": "1.18.2"
   }
 }
