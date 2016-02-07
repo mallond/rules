@@ -63,7 +63,7 @@ Prime directives, and ables ...
 
 
 ```
-// Input - Example Greetings
+// Input - Example Greetings (rules.js - not functional but a conceptual demo)
 
 facts = {
           input: { hour: 10 },
@@ -118,7 +118,66 @@ facts = {
          }
 
 ```
+## Validation Rules
 
+Setup Example
+```
+// Set Up Validate Functions to be used by the validation engine
+const _validate = new validate();
+const _isDecimal3 = _validate.isDecimal(3);
+const _isDecimal4 = _validate.isDecimal(4);
+const _isDecimal5 = _validate.isDecimal(5);
+const _range5_10 = _validate.range(5, 10);
+const _phoneType = _validate.inGroup(['home', 'business']);
+const _membership = _validate.inGroup(['Gold', 'Silver', 'Bronze']);
+
+// Setup Phone validation rules
+const validationRulesPersonPhones = [
+    {key: 'type',   validate: _.isString, error: 'phone.type is not a valid string type'},
+    {key: 'type',   validate: _phoneType, error: 'phone.type is not in phone type group'},
+    {key: 'number', validate: _.isString, error: 'phone.number invalid'}
+];
+
+// Setup Person validation rules
+const validationRulesPerson = [
+
+    {key: 'person.firstName', validate: _.isString,  error: 'person.firstName not a string'},
+    {key: 'person.lastName',  validate: _.isString , error: 'person.lastName not a string'},
+    {key: 'person.DOB',       validate: _.isDate,    error: 'person.DOB invalid'},
+    {key: 'person.secret.id', validate: _.isString,   error: 'person.secret.id not a string'},
+    {key: 'person.secret.pwd',validate: _.isString,   error: 'person.secret.pwd not a string'},
+    {key: 'person.email',     validate: _validate.isEmail,      error: 'person.email is invalid'},
+    {key: 'id',               validate: _.isNumber,  error: 'id is not a number'},
+    {key: 'dec3',             validate: _isDecimal3, error: 'dec3 is not three decimals'},
+    {key: 'dec4',             validate: _isDecimal4, error: 'dec4 is not three decimals'},
+    {key: 'dec5',             validate: _isDecimal5, error: 'dec5 is not three decimals'},
+    {key: 'num_1',            validate: _range5_10,  error: 'Number is not within range of 5-10'},
+    {key: 'membership',       validate: _membership, error: 'Invalid membership'}
+
+];
+
+function getFacts() {
+    let obj = {};
+    obj.person = {};
+    obj.person.firstName = 'Bill';
+    obj.person.lastName = 'Joy';
+    obj.person.DOB = new Date();
+    obj.person.secret = {};
+    obj.person.secret.id = 'myId_isSecret';
+    obj.person.secret.pwd = 'secret';
+    obj.person.phones = [{type: 'home', number: '8675309'}, {type: 'business', number: '8675309'}];
+    obj.person.email = 'Bill@joy.com';
+    obj.id = 12345;
+    obj.dec3 = '1.233';
+    obj.dec4 = '1.2333';
+    obj.dec5 = '1.23333';
+    obj.num_1 = 5;
+    obj.membership = 'Gold';
+    return obj;
+}
+
+
+```
 
 ## Download
 
