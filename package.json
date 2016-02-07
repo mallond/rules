@@ -2,6 +2,10 @@
   "name": "rules",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=4.1 <5",
+    "npm": ">=3.1 <4"
+  },
   "scripts": {
     "start": ""
   },
