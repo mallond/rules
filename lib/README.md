@@ -176,6 +176,17 @@ function getFacts() {
     return obj;
 }
 
+    // Run Example from testValidate.js
+    let errorResults = [];
+    // Run validation rules on Person
+    errorResults.push(_validate.run(validationRulesPerson, getFacts()));
+    // Run validation rules on Persons Phone numbers
+    getFacts().person.phones.forEach(function(elem) {
+        errorResults.push(_validate.run(validationRulesPersonPhones, elem));
+    });
+    // Will contain all errors found
+    errorResults = _.flatten(errorResults);
+
 
 ```
 
@@ -186,9 +197,9 @@ The source is available for download from
 
 Alternatively, you can install using Node Package Manager [npm](https://www.npmjs.org/package/rulesengine):
 
-    npm install rulesengine
-
-    mocha test
+    mocha lib/test
+    
+    mocha lib/test/testValidate.js
 
 
 
