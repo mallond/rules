@@ -1,4 +1,4 @@
-## BizRez Rules - JavaScript Condition Event Engine
+## The World's Smallest Rules Engine  
 
 A small functional Rule Engine - simple maybe an understatement... 
 
