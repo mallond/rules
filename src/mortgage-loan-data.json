@@ -1,0 +1,58 @@
+[
+    {
+      "creditScore": 750,
+      "annualIncome": 90000,
+      "debtToIncomeRatio": 0.32,
+      "loanAmount": 300000,
+      "propertyValue": 375000,
+      "loanToValueRatio": 0.80,
+      "employmentYears": 5,
+      "savings": 40000,
+      "isVeteran": false
+    },
+    {
+      "creditScore": 680,
+      "annualIncome": 70000,
+      "debtToIncomeRatio": 0.38,
+      "loanAmount": 250000,
+      "propertyValue": 280000,
+      "loanToValueRatio": 0.89,
+      "employmentYears": 3,
+      "savings": 15000,
+      "isVeteran": false
+    },
+    {
+      "creditScore": 720,
+      "annualIncome": 110000,
+      "debtToIncomeRatio": 0.28,
+      "loanAmount": 450000,
+      "propertyValue": 500000,
+      "loanToValueRatio": 0.90,
+      "employmentYears": 7,
+      "savings": 80000,
+      "isVeteran": true
+    },
+    {
+      "creditScore": 630,
+      "annualIncome": 55000,
+      "debtToIncomeRatio": 0.41,
+      "loanAmount": 180000,
+      "propertyValue": 200000,
+      "loanToValueRatio": 0.90,
+      "employmentYears": 2,
+      "savings": 10000,
+      "isVeteran": false
+    },
+    {
+      "creditScore": 780,
+      "annualIncome": 150000,
+      "debtToIncomeRatio": 0.25,
+      "loanAmount": 600000,
+      "propertyValue": 750000,
+      "loanToValueRatio": 0.80,
+      "employmentYears": 10,
+      "savings": 200000,
+      "isVeteran": false
+    }
+  ]
+  

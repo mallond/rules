@@ -1,4 +1,4 @@
-## BizRez Rules - JavaScript Condition Event  Engine
+## BizRez Rules - JavaScript Condition Event Engine
 
 A small functional Rule Engine - simple maybe an understatement... 
 
@@ -67,62 +67,7 @@ generate versionalble rule-sets.
 <img src="https://lh6.googleusercontent.com/-_xFQNsVja9s/U1XsZBOVi0I/AAAAAAAAG1I/a4Le6ruZDqU/w674-h502-no/rulesEngine.png" style="position:absolute; right:0px;" width="300px" />
 
 
-```
-// Input - Example Greetings (rules.js - not functional but a conceptual demo)
 
-facts = {
-          input: { hour: 10 },
-          output: {greeting:''}
-         }
-
-// Process - Example Decision Table
-rule =  {
-
-                "id": "GREETING",
-                "description": "Show correct greeting based on time",
-                "condition": function (facts) {
-                    // We will calculate the results regardless
-                    return true;
-                },
-                "action": function (facts) {
-
-                    var decisionTable
-                        = [
-                        {from: 0, to: 11, greeting: 'Good Morning'},
-                        {from: 12, to: 17, greeting: 'Good Afternoon'},
-                        {from: 18, to: 22, greetings: 'Good Evening'},
-                        {from: 23, to: 24, greetings: 'Good Night'}
-                    ];
-
-                    var resultArray;
-
-                    // MAP
-                    resultArray = _.map(decisionTable, function (row) {
-                        var result = "";
-                        if (facts.input.hour >= row.from && facts.input.hour <= row.to) {
-                            result = row.greeting;
-                        }
-                        return result;
-                    });
-                    // Reduce
-                    var result = _.reduce(resultArray, function (memory, element) {
-                        if (element !== "") {
-                            memory = element;
-                        }
-                        return  memory;
-                    });
-                    facts.output.greeting = result;
-
-                }
-            }
-// Output - Example result
-
-facts = {
-          input: { hour: 10 },
-          output: {greeting:'Good Morning'}
-         }
-
-```
  
 
 
