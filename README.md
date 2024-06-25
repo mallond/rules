@@ -2,11 +2,14 @@
 
 A small functional Rule Engine - simple maybe an understatement... 
 
-History
-- 02/08/16 Original Javascript
-- 06/25/24 AI Augmented with Typescript
+![image](https://github.com/mallond/rules/assets/993459/b1fa993f-00ec-4d3a-b28e-816e581e2135)
 
-<img src="http://upload.wikimedia.org/wikipedia/commons/d/dc/Magneto,_longitudinal_section_(Rankin_Kennedy,_Modern_Engines,_Vol_II).jpg" align="right" width="200px" />
+
+History
+- 02/08/16 Original Javascript without AI
+- 06/25/24 New Typescript version with AI
+
+
 
 ## Intro
 
@@ -37,6 +40,22 @@ generate versionalble rule-sets.
 {ables: [persistable, versionable, shareable, adaptable, testable, chainable, reusable, extensible]}
 ```
 
+# AI Assisted Code Generation Claude Sonnet 3.5
+
+## Upload Example Code and let AI create executable examples
+
+![image](https://github.com/mallond/rules/assets/993459/360fb2fd-ec77-42c8-8e4b-ad29e291fb67)
+
+## Cloude Sonnet 3.5 Generated New Code
+
+![image](https://github.com/mallond/rules/assets/993459/80cc55a6-5ffc-4fdf-8c12-b9d6edfc7f42)
+
+## Done-Done, like it Worked! 
+- Use your imagination
+- Upgrade Existing Code
+- Use AI
+
+  
 
 ## A few Use Cases for Usage
 
