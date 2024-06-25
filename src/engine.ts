@@ -1,96 +1,90 @@
-export type Fact = {
-  output: {
-    status: string;
-  };
-  [key: string]: any;
-};
+// engine.ts
+import { Fact, Rule, RulesToLoad, QueueTask } from './interfaces';
 
-export type Rule = {
-  id: string;
-  condition: (facts: Fact) => boolean;
-  action: (facts: Fact) => Promise<void>;
-};
 
-export type RulesToLoad = {
-  rules: Rule[];
-};
+class Queue {
+  private queue: QueueTask[] = [];
+  private running = 0;
+  private readonly concurrency: number;
+  private readonly processTask: (task: QueueTask) => Promise<void>;
 
-type QueueTask = {
-  facts: Fact;
-  ruleId: string;
-  callback?: () => Promise<void>;
-};
+  constructor(concurrency: number, processTask: (task: QueueTask) => Promise<void>) {
+    this.concurrency = concurrency;
+    this.processTask = processTask;
+  }
 
-export const engine = (() => {
-  "use strict";
+  public push(task: QueueTask): void {
+    this.queue.push(task);
+    this.processQueue();
+  }
 
-  const STATUS_CONDITION_MET = "Condition-Met";
-  const STATUS_CONDITION_NOT_MET = "Condition-Not-Met";
-  const CONCURRENCY = 2;
+  private async processQueue(): Promise<void> {
+    if (this.running >= this.concurrency || this.queue.length === 0) return;
 
-  let rules: Rule[] = [];
-  let rulesIndex: Map<string, Rule> = new Map();
+    this.running++;
+    const task = this.queue.shift();
+    if (task) {
+      try {
+        await this.processTask(task);
+      } finally {
+        this.running--;
+        this.processQueue();
+      }
+    }
+  }
+}
 
-  const loadRules = (rulesToLoad: RulesToLoad): void => {
-    rules = rulesToLoad.rules;
-    rules.forEach((rule) => rulesIndex.set(rule.id, rule));
-  };
+export class RuleEngine {
+  private static readonly STATUS_CONDITION_MET = "Condition-Met";
+  private static readonly STATUS_CONDITION_NOT_MET = "Condition-Not-Met";
+  private static readonly CONCURRENCY = 2;
 
-  const execute = async (facts: Fact, ruleId: string): Promise<void> => {
+  private rules: Rule[] = [];
+  private rulesIndex: Map<string, Rule> = new Map();
+  private queue: Queue;
+
+  constructor() {
+    this.queue = new Queue(RuleEngine.CONCURRENCY, this.runRules.bind(this));
+  }
+
+  public loadRules(rulesToLoad: RulesToLoad): void {
+    this.rules = rulesToLoad.rules;
+    this.rules.forEach((rule) => this.rulesIndex.set(rule.id, rule));
+  }
+
+  public async execute(facts: Fact, ruleId: string): Promise<void> {
     try {
-      const rule = rulesIndex.get(ruleId);
+      const rule = this.rulesIndex.get(ruleId);
       if (!rule) {
         throw new Error(`Rule with id ${ruleId} not found`);
       }
 
       if (rule.condition(facts)) {
         await rule.action(facts);
-        facts.output.status = STATUS_CONDITION_MET;
+        facts.output.status = RuleEngine.STATUS_CONDITION_MET;
       } else {
-        facts.output.status = STATUS_CONDITION_NOT_MET;
+        facts.output.status = RuleEngine.STATUS_CONDITION_NOT_MET;
       }
     } catch (error) {
       throw new Error("Error in engine.execute");
     }
-  };
+  }
 
-  const runRules = async (task: QueueTask): Promise<void> => {
+  private async runRules(task: QueueTask): Promise<void> {
     try {
-      await execute(task.facts, task.ruleId);
+      await this.execute(task.facts, task.ruleId);
       if (typeof task.callback === "function") {
         await task.callback();
       }
     } catch (error) {
       console.error("Error running rules:", error);
     }
-  };
+  }
 
-  const queue = (() => {
-    const queue: QueueTask[] = [];
-    let running = 0;
+  public pushToQueue(task: QueueTask): void {
+    this.queue.push(task);
+  }
+}
 
-    const processQueue = async (): Promise<void> => {
-      if (running >= CONCURRENCY || queue.length === 0) return;
-
-      running++;
-      const task = queue.shift();
-      if (task) {
-        try {
-          await runRules(task);
-        } finally {
-          running--;
-          processQueue();
-        }
-      }
-    };
-
-    return {
-      push: (task: QueueTask): void => {
-        queue.push(task);
-        processQueue();
-      },
-    };
-  })();
-
-  return { loadRules, execute, queue };
-})();
+// Create and export a single instance of RuleEngine
+export const engine = new RuleEngine();

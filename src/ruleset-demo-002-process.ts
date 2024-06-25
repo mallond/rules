@@ -1,4 +1,5 @@
-import { engine, Fact } from './engine';
+import { engine} from './engine';
+import { Fact} from './interfaces';
 import { rules } from './ruleset-demo-002-rules';
 import fs from 'fs/promises';
 import path from 'path';
@@ -26,10 +27,7 @@ async function processLoanApplications() {
       application.loanApproved = false;
 
       // Process the application
-      await engine.queue.push({ facts: application, ruleId: 'check-credit-score' });
-      await engine.queue.push({ facts: application, ruleId: 'check-income' });
-      await engine.queue.push({ facts: application, ruleId: 'check-debt-to-income-ratio' });
-      await engine.queue.push({ facts: application, ruleId: 'final-approval' });
+      await processApplication(application);
 
       console.log(`Application ${index + 1} Result:`);
       console.log(`Loan Approved: ${application.loanApproved ? 'Yes' : 'No'}`);
@@ -38,6 +36,27 @@ async function processLoanApplications() {
 
   } catch (error) {
     console.error('Error processing loan applications:', error);
+  }
+}
+
+async function processApplication(application: Fact) {
+  const ruleIds = [
+    'check-credit-score',
+    'check-income',
+    'check-debt-to-income-ratio',
+    'final-approval'
+  ];
+
+  for (const ruleId of ruleIds) {
+    await new Promise<void>((resolve) => {
+      engine.pushToQueue({
+        facts: application,
+        ruleId,
+        callback: async () => {
+          resolve();
+        }
+      });
+    });
   }
 }
 

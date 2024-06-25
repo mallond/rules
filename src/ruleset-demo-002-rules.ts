@@ -1,4 +1,4 @@
-import { Rule, Fact } from './engine';
+import { Fact, Rule, RulesToLoad, QueueTask } from './interfaces';
 
 export const rules: Rule[] = [
   {

@@ -1,6 +1,10 @@
 ## BizRez Rules - JavaScript Condition Event  Engine
 
-A small functional Rule Engine - simple maybe an understatement...
+A small functional Rule Engine - simple maybe an understatement... 
+
+History
+- 02/08/16 Original Javascript
+- 06/25/24 AI Augmented with Typescript
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/d/dc/Magneto,_longitudinal_section_(Rankin_Kennedy,_Modern_Engines,_Vol_II).jpg" align="right" width="200px" />
 
@@ -19,19 +23,20 @@ Prime directives, and ables ...
 - Rules can be unit tested independently (testable)
 - Crazy fast
 
-#####[Martin Fowler on Rule Engines](http://martinfowler.com/bliki/RulesEngine.html)
+#####
 
+[Martin Fowler on Rule Engines](http://martinfowler.com/bliki/RulesEngine.html)
+
+# AI 06/25/24
+Much has changed in the last 9 years this simple example was created. We are in the AI Age and
+Prompts can do much of the work. It is the intention of this code to be used with AI prompts to 
+generate versionalble rule-sets. 
 
 ```
 // Rule Abilities 
 {ables: [persistable, versionable, shareable, adaptable, testable, chainable, reusable, extensible]}
 ```
-## Dependencies
 
--  Underscore.js for Mapreduce Decision Tables
--  Async.js for asynchronous hooks and behavior 
--  Mocha.js for for test infecting the code (good infection)
--  Require.js for the module loader
 
 ## A few Use Cases for Usage
 
@@ -118,94 +123,7 @@ facts = {
          }
 
 ```
-## Validation Rules
-
-Setup Example
-```
-// Set Up Validate Functions to be used by the validation engine
-const _validate = new validate();
-const _isDecimal3 = _validate.isDecimal(3);
-const _isDecimal4 = _validate.isDecimal(4);
-const _isDecimal5 = _validate.isDecimal(5);
-const _range5_10 = _validate.range(5, 10);
-const _phoneType = _validate.inGroup(['home', 'business']);
-const _membership = _validate.inGroup(['Gold', 'Silver', 'Bronze']);
-
-// Setup Phone validation rules
-const validationRulesPersonPhones = [
-    {key: 'type',   validate: _.isString, error: 'phone.type is not a valid string type'},
-    {key: 'type',   validate: _phoneType, error: 'phone.type is not in phone type group'},
-    {key: 'number', validate: _.isString, error: 'phone.number invalid'}
-];
-
-// Setup Person validation rules
-const validationRulesPerson = [
-
-    {key: 'person.firstName', validate: _.isString,  error: 'person.firstName not a string'},
-    {key: 'person.lastName',  validate: _.isString , error: 'person.lastName not a string'},
-    {key: 'person.DOB',       validate: _.isDate,    error: 'person.DOB invalid'},
-    {key: 'person.secret.id', validate: _.isString,   error: 'person.secret.id not a string'},
-    {key: 'person.secret.pwd',validate: _.isString,   error: 'person.secret.pwd not a string'},
-    {key: 'person.email',     validate: _validate.isEmail,      error: 'person.email is invalid'},
-    {key: 'id',               validate: _.isNumber,  error: 'id is not a number'},
-    {key: 'dec3',             validate: _isDecimal3, error: 'dec3 is not three decimals'},
-    {key: 'dec4',             validate: _isDecimal4, error: 'dec4 is not three decimals'},
-    {key: 'dec5',             validate: _isDecimal5, error: 'dec5 is not three decimals'},
-    {key: 'num_1',            validate: _range5_10,  error: 'Number is not within range of 5-10'},
-    {key: 'membership',       validate: _membership, error: 'Invalid membership'}
-
-];
-
-function getFacts() {
-    let obj = {};
-    obj.person = {};
-    obj.person.firstName = 'Bill';
-    obj.person.lastName = 'Joy';
-    obj.person.DOB = new Date();
-    obj.person.secret = {};
-    obj.person.secret.id = 'myId_isSecret';
-    obj.person.secret.pwd = 'secret';
-    obj.person.phones = [{type: 'home', number: '8675309'}, {type: 'business', number: '8675309'}];
-    obj.person.email = 'Bill@joy.com';
-    obj.id = 12345;
-    obj.dec3 = '1.233';
-    obj.dec4 = '1.2333';
-    obj.dec5 = '1.23333';
-    obj.num_1 = 5;
-    obj.membership = 'Gold';
-    return obj;
-}
-
-    // Run Example from testValidate.js
-    let errorResults = [];
-    // Run validation rules on Person
-    errorResults.push(_validate.run(validationRulesPerson, getFacts()));
-    // Run validation rules on Persons Phone numbers
-    getFacts().person.phones.forEach(function(elem) {
-        errorResults.push(_validate.run(validationRulesPersonPhones, elem));
-    });
-    // Will contain all errors found
-    errorResults = _.flatten(errorResults);
-
-
-```
-
-## Decision Table Rules (next WIP)
-
-## Map Rules (WIP)
-
-## Process Rules (WIP)
-
-## Download
-
-The source is available for download from
-[GitHub](http://github.com/mallond/rules).
-
-Alternatively, you can install using Node Package Manager [npm](https://www.npmjs.org/package/rulesengine):
-
-    mocha lib/test
-    
-    mocha lib/test/testValidate.js
+ 
 
 
 
