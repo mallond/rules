@@ -1,0 +1,17 @@
+[
+    {
+      "creditScore": 750,
+      "annualIncome": 60000,
+      "debtToIncomeRatio": 0.3
+    },
+    {
+      "creditScore": 680,
+      "annualIncome": 55000,
+      "debtToIncomeRatio": 0.35
+    },
+    {
+      "creditScore": 800,
+      "annualIncome": 100000,
+      "debtToIncomeRatio": 0.2
+    }
+  ]

@@ -3,18 +3,25 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=4.1 <5",
-    "npm": ">=3.1 <4"
+    "node": "20.14.0"
   },
   "scripts": {
-    "start": ""
-  },
-  "dependencies": {
-    "underscore": "^1.8.3"
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "run": "npm run build && npm start"
   },
   "devDependencies": {
-    "requirejs": "~2.1.11",
-    "async": "0.6.2",
-    "mocha": "1.18.2"
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.8",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.2"
   }
 }
